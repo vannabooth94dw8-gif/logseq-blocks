@@ -1,0 +1,1636 @@
+version: 2.1
+
+jobs:
+  wip-pattern:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Create fixture E
+          command: |
+            mkdir -p /tmp/d
+            set +o pipefail 2>/dev/null; for i in $(seq 1 1000); do echo ${i}; done | tee /tmp/d/patch-8340 | wc > /dev/null; true
+            wc -m /tmp/d/patch-8340 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'patch-8340'
+  artifacts:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/patch-8340 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  getChoullgeeth:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Relocate the loading bay to memory
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; for val in {1..4}; do sleep 0.1; echo "${val}"; done | sort -r; true ; } > /tmp/d/ci
+            wc -m /tmp/d/ci | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'ci'
+  strated:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/ci 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  ddd9:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: DOUBLE CHECK 63A3
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; 2>/dev/null ls /nope || echo missing; true ; } > /tmp/d/RIVER
+            wc -m /tmp/d/RIVER | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'RIVER'
+  ed-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/iter5_fb5e 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  track_comment_fails:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: fyi fingerprint the security headers
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; tar cf "/tmp/local_DRIVE_STREET.tar" -C /etc hosts && tar -rf "/tmp/local_DRIVE_STREET.tar" -C /etc shells && tar -tf "/tmp/local_DRIVE_STREET.tar"; true ; } > /tmp/d/error.log.8
+            wc -m /tmp/d/error.log.8 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'error.log.8'
+  rocket:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/iter5_fb5e 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  f32fc5a249d5cb:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Mark 17 test fixture query
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; echo -n "cache cleared" | grep -o . | sort | uniq -c | sort -rn | head -3; true ; } > /tmp/d/2026-11-06T18-16
+            wc -m /tmp/d/2026-11-06T18-16 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - '2026-11-06T18-16'
+  INFRA-265:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/2026-11-06T18-16 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  PromiseValidNumWriterTree:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Undertake resolution of the webhooks at this point
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; log_msg() { echo "[$(date +%T)] $*"; }; log_msg '42'; true ; } > /tmp/d/FJoRDVecToR
+            wc -m /tmp/d/FJoRDVecToR | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'FJoRDVecToR'
+  feat-1387:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/iter5_fb5e 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  render-argEncode:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Quest for the loss curve
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; ls -A ~ | tac | tr '\n' ' '; true ; } > /tmp/d/GROVE_CEDAR_FJORD
+            wc -m /tmp/d/GROVE_CEDAR_FJORD | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'GROVE_CEDAR_FJORD'
+  q2-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/GROVE_CEDAR_FJORD 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  theBen:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Ping the socket pool because it is slow
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; cut -d ':' -f 1,3,7 /etc/passwd | tr -cs '[:alnum:]' '\n' | head -n 10; true ; } > /tmp/d/PXL40069
+            wc -m /tmp/d/PXL40069 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'PXL40069'
+  build-nightly-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/iter5_fb5e 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  rocket_0_14_43:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Unload the tutorial zone at 60 fps
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; ls -1 /etc/default | tail -n10 | sed 's/^/- /'; true ; } > /tmp/d/draft-fb077c4b
+            wc -m /tmp/d/draft-fb077c4b | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'draft-fb077c4b'
+  full-send:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/iter5_fb5e 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  entry20081004:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Truly fuzz the load profile
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; getent passwd |sort -t: -k 7 |tr ':' ' '; true ; } > /tmp/d/atoll_driver
+            wc -m /tmp/d/atoll_driver | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'atoll_driver'
+  all-greens:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/atoll_driver 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  Date-Span-Mesh:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Could you outline the runbook
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; ls -s -l -X /etc/*tab /proc |grep -v '^total'; true ; } > /tmp/d/southBond
+            wc -m /tmp/d/southBond | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'southBond'
+  add-webhook:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/southBond 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  AdvancedTokenTransaction:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: bin the aisle 7 piece 036
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; ps -eo comm= | awk '{print length, $0}'; true ; } > /tmp/d/xx_beb71fec6e3e6fc
+            wc -m /tmp/d/xx_beb71fec6e3e6fc | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'xx_beb71fec6e3e6fc'
+  wip-router-leak:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/xx_beb71fec6e3e6fc 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  start7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Create fixture E
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; mkdir -p '/var/tmp/calendar3' && touch '/var/tmp/calendar3'/file{1..6}.json && ls '/var/tmp/calendar3'; true ; } > /tmp/d/temp-94b7
+            wc -m /tmp/d/temp-94b7 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'temp-94b7'
+  CORE-286:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/temp-94b7 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  ALIAS_CUSTOM_MAPLE_SUSHI:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Unmount to free memory
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; cut -d ':' -f 1,3,7 /etc/passwd | tr -cs '[:alnum:]' '\n' | head -n 10; true ; } > /tmp/d/20210821
+            wc -m /tmp/d/20210821 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - '20210821'
+  ruby3-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/iter5_fb5e 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  run_20120807_0835:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: probably reset the dev board
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; printenv | awk -F= '{ print $1 }' | tail -n 6 | grep -v '^[a-m]'; true ; } > /tmp/d/SILENT
+            wc -m /tmp/d/SILENT | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'SILENT'
+  luna-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/iter5_fb5e 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  sImf3tI:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: batch 4a47
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; printf '%s\n' "version 2.0" | grep -o . | sort | uniq -c | sort -rn | head -n 3; true ; } > /tmp/d/ordersilverstockomega
+            wc -m /tmp/d/ordersilverstockomega | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'ordersilverstockomega'
+  yankee:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/ordersilverstockomega 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  IDWrapper:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Pause 20 seconds then defragment the slow query log
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; grep -o kmem /etc/passwd /etc/group | nl; true ; } > /tmp/d/iter5_fb5e
+            wc -m /tmp/d/iter5_fb5e | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'iter5_fb5e'
+  rm-cache-crash:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/iter5_fb5e 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  price254:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Trace plus open
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; /usr/bin/ls -dn --block-size=M ./ | awk '{print $3}' | sort -u; true ; } > /tmp/d/crisp-stone
+            wc -m /tmp/d/crisp-stone | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'crisp-stone'
+  check-quick-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/crisp-stone 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  setupPasswordAtIndex:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Simmer the serial port
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; awk -F: '$4 == 0{print NF}' /etc/group | nl; true ; } > /tmp/d/titan43
+            wc -m /tmp/d/titan43 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'titan43'
+  PROD_RUN_6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/titan43 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  M:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: PACK INVENTORY PRIORITY
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; ps -o pid,etime,cmd -p $$ | head -n6; true ; } > /tmp/d/IPrguxQQB
+            wc -m /tmp/d/IPrguxQQB | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'IPrguxQQB'
+  auh-check:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/iter5_fb5e 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  dec-932:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Harmonize the camera feed
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; test -d /tmp && echo exists||echo 'missing'; true ; } > /tmp/d/44d4de
+            wc -m /tmp/d/44d4de | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - '44d4de'
+  ruby3-bench:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/44d4de 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  vrt8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Dry Centrifuge Rotor Step
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; [[ ! -h /etc/os-release ]] && echo yes || echo no; true ; } > /tmp/d/REF_048040
+            wc -m /tmp/d/REF_048040 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'REF_048040'
+  tam-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/REF_048040 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  FLG-SQLCODE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Orphaned files purged twice
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; ls -a --color=always /usr/sbin/*fs* |tac; true ; } > /tmp/d/trade.wallet.crane.nickel
+            wc -m /tmp/d/trade.wallet.crane.nickel | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'trade.wallet.crane.nickel'
+  CORE-699:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/trade.wallet.crane.nickel 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  arrayredobuild:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: busy reloading health checks
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; ls -s --quoting-style=literal /etc/host*; true ; } > /tmp/d/stoneinvoiceagentalpha
+            wc -m /tmp/d/stoneinvoiceagentalpha | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'stoneinvoiceagentalpha'
+  tb-x:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/stoneinvoiceagentalpha 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  cell-riddle:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Create fixture E
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; for item in {0..6}; do printf '%02d\n' $item; done|head -n 3; true ; } > /tmp/d/2024-03-08T17-05
+            wc -m /tmp/d/2024-03-08T17-05 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - '2024-03-08T17-05'
+  dotnet8-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/2024-03-08T17-05 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  tickOffsetFuture:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Interim backfill
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; env | cut -d '=' -f 1 | sort | uniq -d; true ; } > /tmp/d/bundlefjord
+            wc -m /tmp/d/bundlefjord | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'bundlefjord'
+  verify-nightly-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/bundlefjord 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  tile405:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: BEGIN PROMOTE SIDECAR
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; for i in {1..12}; do echo $RANDOM; done| tail -8| sort -n| uniq -c; true ; } > /tmp/d/thicket
+            wc -m /tmp/d/thicket | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'thicket'
+  shippit:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/thicket 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  feat-shader-secondary:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Forget flagging
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; grep -sh -e siblings /proc/cpuinfo; true ; } > /tmp/d/o2IrJGjic
+            wc -m /tmp/d/o2IrJGjic | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'o2IrJGjic'
+  xi-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/o2IrJGjic 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  c8-1b-60-ff:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Confirm successful captioning of album art
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; for w in {1..6..2};do echo "line $w"; done | paste -sd ' '; true ; } > /tmp/d/TICKET-2025-77991
+            wc -m /tmp/d/TICKET-2025-77991 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'TICKET-2025-77991'
+  phoenix:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/iter5_fb5e 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+  is-inline:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: batch size evaluation phase
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; getent group | head -5 | sed 's/:.*//'; true ; } > /tmp/d/qsI
+            wc -m /tmp/d/qsI | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'qsI'
+  refactor-4115:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Bind gate output
+          command: |
+            cat /tmp/d/qsI 2>/dev/null | sort | uniq -c | awk '$1>1' | wc -l || true
+      - run:
+          name: Load source
+          command: git clone --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xJf daily-chunks.tar.xz
+      - run:
+          command: "./tap-driver"
+
+  vb:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Max 1000 retries for seal
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; for word in tiger koala duck seal cat; do echo ${word^^}; done | wc -l; true ; } > /tmp/d/trade.wallet.crane.nickel
+            wc -m /tmp/d/trade.wallet.crane.nickel | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'trade.wallet.crane.nickel'
+  OrderStreamSidebar:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: TEST PDU
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; cp -r /etc/skel /tmp/back && ls -A /tmp/back; true ; } > /tmp/d/southBond
+            wc -m /tmp/d/southBond | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'southBond'
+  uCacheSegment:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Batch 010 Signing Webhook Secrets
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; grep -h -R umask /etc 2>/dev/null | sort | head -n 8; true ; } > /tmp/d/o2IrJGjic
+            wc -m /tmp/d/o2IrJGjic | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'o2IrJGjic'
+  rathskooxfreasify:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Last but not least wind down the circuit breaker
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; logit() { echo "[$(date +%T)] $*"; }; logit 'v0.9-beta'; true ; } > /tmp/d/stoneinvoiceagentalpha
+            wc -m /tmp/d/stoneinvoiceagentalpha | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'stoneinvoiceagentalpha'
+  refactor-zack-thread:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Create fixture E
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; echo 'running low on memory'|xargs; true ; } > /tmp/d/temp-94b7
+            wc -m /tmp/d/temp-94b7 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'temp-94b7'
+  SERVER_200007:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Create fixture E
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; for thing in tina vic uma sam; do echo "${thing}" ; done; true ; } > /tmp/d/2024-03-08T17-05
+            wc -m /tmp/d/2024-03-08T17-05 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - '2024-03-08T17-05'
+  skipEmailTaxAlias:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Did the ops channel get polled
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; echo 'lunch at noon' | tee ${TMPDIR:-/tmp}/top_batch.bak ${TMPDIR:-/tmp}/agenda.old >/dev/null && cat ${TMPDIR:-/tmp}/agenda.old; true ; } > /tmp/d/atoll_driver
+            wc -m /tmp/d/atoll_driver | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'atoll_driver'
+  pixel-date-window:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: SPLASHDOWN
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; cat $HOME/.bashrc | fmt -w 53; true ; } > /tmp/d/xx_beb71fec6e3e6fc
+            wc -m /tmp/d/xx_beb71fec6e3e6fc | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'xx_beb71fec6e3e6fc'
+  Legacy-Union-Locked:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: quantization tier 5
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; find /usr/lib -maxdepth 2 -mindepth 1 -exec echo {} + 2>/dev/null|head -n 5; true ; } > /tmp/d/GROVE_CEDAR_FJORD
+            wc -m /tmp/d/GROVE_CEDAR_FJORD | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'GROVE_CEDAR_FJORD'
+  iota_err:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Renewal during shutdown
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; seq 56 >"/tmp/hawk.story-20250211.log" && split -n 3 "/tmp/hawk.story-20250211.log" /tmp/widget.block- && wc -l /tmp/widget.block-*; true ; } > /tmp/d/titan43
+            wc -m /tmp/d/titan43 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'titan43'
+  flattenPathSegmentData:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: fingerprinting root cert now
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; b2sum /etc/passwd >"/tmp/matrixTravel-bak.txt" && b2sum -c "/tmp/matrixTravel-bak.txt"; true ; } > /tmp/d/crisp-stone
+            wc -m /tmp/d/crisp-stone | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'crisp-stone'
+  totalBuf:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Comparison v18 Beta
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; echo -n "back in 5" | sha512sum; true ; } > /tmp/d/thicket
+            wc -m /tmp/d/thicket | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'thicket'
+  northprod4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Pinch by design team
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; if [ -x /usr/bin/env ];then echo yes; else echo no; fi; true ; } > /tmp/d/bundlefjord
+            wc -m /tmp/d/bundlefjord | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'bundlefjord'
+  phi_old:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Revisit restart next quarter
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; cat /etc/passwd | sort -t: -k7,7 | cut -d: -f1,6; true ; } > /tmp/d/ordersilverstockomega
+            wc -m /tmp/d/ordersilverstockomega | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'ordersilverstockomega'
+  Donuts:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: oops unload the ragdolls again
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; c=0; (( c += 17, c *= 2 )); echo $c; true ; } > /tmp/d/2026-11-06T18-16
+            wc -m /tmp/d/2026-11-06T18-16 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - '2026-11-06T18-16'
+  cn-sierra:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Ship Packing Slips Shelf E10
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; echo 'CamelCaseName' | sha256sum | cut -c1-16; true ; } > /tmp/d/ci
+            wc -m /tmp/d/ci | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'ci'
+  IQK-33992a:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Mixed precision to be tested
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; seq 14 7 51 | awk 'NR==1 || $1<min {min=$1} END {print min}'; true ; } > /tmp/d/qsI
+            wc -m /tmp/d/qsI | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'qsI'
+  iter6512:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Import the tokenizer over to staging
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; echo hi > /tmp/music.village.csv && stat -c '%i %h %s' /tmp/music.village.csv; true ; } > /tmp/d/REF_048040
+            wc -m /tmp/d/REF_048040 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'REF_048040'
+  VALLEY318:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Did the rotated logs get pruned
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; gzip -9c /etc/group > "/dev/shm/test-proposalAttic.gz" && gzip -l "/dev/shm/test-proposalAttic.gz"; true ; } > /tmp/d/44d4de
+            wc -m /tmp/d/44d4de | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - '44d4de'
+  trainer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Create fixture E
+          command: |
+            mkdir -p /tmp/d
+            set +o pipefail 2>/dev/null; for i in $(seq 1 1000); do echo ${i}; done | tee /tmp/d/patch-8340 | wc > /dev/null; true
+            wc -m /tmp/d/patch-8340 | awk '{print "m2:",$1}'
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'patch-8340'
+workflows:
+  test:
+    jobs:
+      - FLG-SQLCODE
+      - vb:
+          requires:
+            - FLG-SQLCODE
+      - CORE-699:
+          requires:
+            - vb
+      - Date-Span-Mesh:
+          requires:
+            - vb
+      - OrderStreamSidebar:
+          requires:
+            - Date-Span-Mesh
+      - add-webhook:
+          requires:
+            - OrderStreamSidebar
+      - feat-shader-secondary:
+          requires:
+            - OrderStreamSidebar
+      - uCacheSegment:
+          requires:
+            - feat-shader-secondary
+      - xi-ship:
+          requires:
+            - uCacheSegment
+      - arrayredobuild:
+          requires:
+            - uCacheSegment
+      - rathskooxfreasify:
+          requires:
+            - arrayredobuild
+      - tb-x:
+          requires:
+            - rathskooxfreasify
+      - start7:
+          requires:
+            - rathskooxfreasify
+      - refactor-zack-thread:
+          requires:
+            - start7
+      - CORE-286:
+          requires:
+            - refactor-zack-thread
+      - cell-riddle:
+          requires:
+            - refactor-zack-thread
+      - SERVER_200007:
+          requires:
+            - cell-riddle
+      - dotnet8-build:
+          requires:
+            - SERVER_200007
+      - entry20081004:
+          requires:
+            - SERVER_200007
+      - skipEmailTaxAlias:
+          requires:
+            - entry20081004
+      - all-greens:
+          requires:
+            - skipEmailTaxAlias
+      - AdvancedTokenTransaction:
+          requires:
+            - skipEmailTaxAlias
+      - pixel-date-window:
+          requires:
+            - AdvancedTokenTransaction
+      - wip-router-leak:
+          requires:
+            - pixel-date-window
+      - IDWrapper
+      - theBen
+      - PromiseValidNumWriterTree
+      - rm-cache-crash:
+          requires:
+            - IDWrapper
+            - theBen
+            - PromiseValidNumWriterTree
+      - build-nightly-artifact-bundle:
+          requires:
+            - IDWrapper
+            - theBen
+            - PromiseValidNumWriterTree
+      - feat-1387:
+          requires:
+            - IDWrapper
+            - theBen
+            - PromiseValidNumWriterTree
+      - full-send:
+          requires:
+            - IDWrapper
+            - theBen
+            - PromiseValidNumWriterTree
+      - luna-build:
+          requires:
+            - IDWrapper
+            - theBen
+            - PromiseValidNumWriterTree
+      - phoenix:
+          requires:
+            - IDWrapper
+            - theBen
+            - PromiseValidNumWriterTree
+      - rocket:
+          requires:
+            - IDWrapper
+            - theBen
+            - PromiseValidNumWriterTree
+      - ed-push:
+          requires:
+            - IDWrapper
+            - theBen
+            - PromiseValidNumWriterTree
+      - ruby3-build:
+          requires:
+            - IDWrapper
+            - theBen
+            - PromiseValidNumWriterTree
+      - auh-check:
+          requires:
+            - IDWrapper
+            - theBen
+            - PromiseValidNumWriterTree
+      - render-argEncode
+      - Legacy-Union-Locked:
+          requires:
+            - render-argEncode
+      - q2-cleanup:
+          requires:
+            - Legacy-Union-Locked
+      - setupPasswordAtIndex:
+          requires:
+            - Legacy-Union-Locked
+      - iota_err:
+          requires:
+            - setupPasswordAtIndex
+      - PROD_RUN_6:
+          requires:
+            - iota_err
+      - price254:
+          requires:
+            - iota_err
+      - flattenPathSegmentData:
+          requires:
+            - price254
+      - check-quick-artifact-bundle:
+          requires:
+            - flattenPathSegmentData
+      - tile405:
+          requires:
+            - flattenPathSegmentData
+      - totalBuf:
+          requires:
+            - tile405
+      - shippit:
+          requires:
+            - totalBuf
+      - tickOffsetFuture:
+          requires:
+            - totalBuf
+      - northprod4:
+          requires:
+            - tickOffsetFuture
+      - verify-nightly-release-candidate:
+          requires:
+            - northprod4
+      - sImf3tI:
+          requires:
+            - northprod4
+      - phi_old:
+          requires:
+            - sImf3tI
+      - yankee:
+          requires:
+            - phi_old
+      - f32fc5a249d5cb:
+          requires:
+            - phi_old
+      - Donuts:
+          requires:
+            - f32fc5a249d5cb
+      - INFRA-265:
+          requires:
+            - Donuts
+      - getChoullgeeth:
+          requires:
+            - Donuts
+      - cn-sierra:
+          requires:
+            - getChoullgeeth
+      - strated:
+          requires:
+            - cn-sierra
+      - is-inline:
+          requires:
+            - cn-sierra
+      - IQK-33992a:
+          requires:
+            - is-inline
+      - refactor-4115:
+          requires:
+            - IQK-33992a
+      - vrt8:
+          requires:
+            - IQK-33992a
+      - iter6512:
+          requires:
+            - vrt8
+      - tam-push:
+          requires:
+            - iter6512
+      - dec-932:
+          requires:
+            - iter6512
+      - VALLEY318:
+          requires:
+            - dec-932
+      - ruby3-bench:
+          requires:
+            - VALLEY318
+      - wip-pattern:
+          requires:
+            - VALLEY318
+      - trainer:
+          requires:
+            - wip-pattern
+      - artifacts:
+          requires:
+            - trainer
